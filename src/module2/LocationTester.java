@@ -14,6 +14,9 @@ public class LocationTester {
 		System.out.println(ucsd.distance(boston));
 		System.out.println(ucsd.distance(49, -82));
 		System.out.println(theFarm.distance(0, 0));
+		
+//		System.out.println(ucsd.latitude); error!
+		System.out.println(ucsd.getLatitude());
 	}
 	
 }

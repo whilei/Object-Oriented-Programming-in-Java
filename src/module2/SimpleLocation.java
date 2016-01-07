@@ -3,8 +3,9 @@ package module2;
 public class SimpleLocation {
 
 	// init declarations
-	public double latitude;
-	public double longitude;
+	// aka Member Variables
+	private double latitude;
+	private double longitude;
 	
 	// CONSTRUCTORSSS!!
 	// --> name is same as class
@@ -22,7 +23,24 @@ public class SimpleLocation {
 		this.longitude = lon;
 	}
 	
-	public double getDist(double x1, double y1, double x2, double y2)
+	// Getters and Setters!
+	public double getLatitude() // getter!
+	{
+		return this.latitude;
+	}
+	public void setLatitude(double lat) // setter!
+	{
+		if ( lat < -180 || lat > 180 ){ // border control
+			System.out.println("You can swim around the world but you'll need a lot of helium in your floaties for this one, Rudolph!");
+		} 
+		else {
+			this.latitude = lat;
+		}
+	}
+	
+	
+	// calculate rudimentary distance
+	private double getDist(double x1, double y1, double x2, double y2)
 	{
 		// find hypotenuse => pythagoras
 		double tooBig = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
