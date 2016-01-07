@@ -6,8 +6,16 @@ public class SimpleLocation {
 	public double latitude;
 	public double longitude;
 	
-	// da CONSTRUCTOR!!
-		// note: name is same as class
+	// CONSTRUCTORSSS!!
+	// --> name is same as class
+	
+	// constructor default
+	public SimpleLocation() 
+	{
+		this.latitude = 42; // "this" refers to class
+		this.longitude = -72;
+	}
+	// constructor with args (overlorded!)
 	public SimpleLocation(double lat, double lon)
 	{
 		this.latitude = lat; // "this" refers to class
@@ -23,10 +31,16 @@ public class SimpleLocation {
 		return justRightMiles; 
 	}
 	
+	// 
+	public double distance(double anotherLat, double anotherLon)
+	{ 
+		return getDist(this.latitude, this.longitude, anotherLat, anotherLon);	
+	}
+	// overlorded!
 	public double distance(SimpleLocation somewhereElse)
 	{ 
-		
 		return getDist(this.latitude, this.longitude, somewhereElse.latitude, somewhereElse.longitude);	
-		
 	}
+
+	
 }
