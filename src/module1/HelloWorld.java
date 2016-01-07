@@ -89,7 +89,7 @@ public class HelloWorld extends PApplet
 			// note that this puts the total width with two maps at 50 + 350 + 50 + 350 + 50 (including a little end buffer space)
 			// so I've changed the applet width to 850
 		
-		map2.zoomAndPanTo(zoomLevel, new Location(42f, -72f));
+		map2.zoomAndPanTo(zoomLevel, new Location(42.36f, -71.05f));
 		
 		MapUtils.createDefaultEventDispatcher(this, map2);
 
