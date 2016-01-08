@@ -29,19 +29,22 @@ import parsing.ParseFeed;
  * */
 public class EarthquakeCityMap extends PApplet {
 
+	// -------- IGNORE -------- //
 	// You can ignore this.  It's to keep eclipse from generating a warning.
 	private static final long serialVersionUID = 1L;
-
 	// IF YOU ARE WORKING OFFLINE, change the value of this variable to true
 	private static final boolean offline = false;
+	/** This is where to find the local tiles, for working without an Internet connection */
+	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
+	
+	// -------- THRESHOLDS -------- //
 	// Less than this threshold is a light earthquake
 	public static final float THRESHOLD_MODERATE = 5;
 	// Less than this threshold is a minor earthquake
 	public static final float THRESHOLD_LIGHT = 4;
 
-	/** This is where to find the local tiles, for working without an Internet connection */
-	public static String mbTilesString = "blankLight-1-3.mbtiles";
+	
 	
 	// The map
 	private UnfoldingMap map;
