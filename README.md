@@ -1,3 +1,11 @@
+# UC San Diego/Coursera: Object Oriented Programming in Java
+
+I'm making commits on branches named after their respective modules; **I'm not merging the branches to master**, which means if you want to see the work progress for a specific module, you'll need to checkout that branch. 
+
+ 
+
+original README follows: 
+```
 unfolding_app_template and UC San Diego/Coursera MOOC starter code
 ==================================================================
 
@@ -35,7 +43,7 @@ If the import does not work follow the steps below.
 TROUBLE SHOOTING
 
 Switch Java Compiler to 1.6 if you get VM problems. (Processing should work with Java 1.6, and 1.7)
-
+```
 
 
 
