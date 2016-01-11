@@ -1,5 +1,9 @@
 package module3;
 
+import java.awt.List;
+import java.util.HashMap;
+import java.util.Map;
+
 // import UnfoldingMap stuff as suggested by Eclipse
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.data.GeoJSONReader;
@@ -19,9 +23,10 @@ public class LifeExpectancy extends PApplet {
 	UnfoldingMap map;
 	
 	//	Ordered list of things of type Feature and Marker
-	List<Marker> countries; 
+	List countries;
+//	List<Feature> countries = new ArrayList<Feature>(); 
 //	List<Feature> countries = new ArrayList(); // another Abstract Data Type
-	List<Marker> countryMarkers;
+	List countryMarkers;
 	
 	Map<String, Float> lifeExpByCountry; // <stuff> means Generics
 	// Map is Abstract Data Type (more to follow)
@@ -37,7 +42,7 @@ public class LifeExpectancy extends PApplet {
 		
 		for (String row : rows) {
 			String[] columns = row.split(",");
-			if ( ... ) { // if it looks legit
+			if ( true ) { // if it looks legit
 				float value = Float.parseFloat(columns[5]); // where lifeExp value is
 															// cast string to float
 				lifeExpMap.put(columns[4], value); // where countryId is
@@ -70,7 +75,7 @@ public class LifeExpectancy extends PApplet {
 		
 		lifeExpByCountry = loadLifeExpectancyFromCSV("data/LifeExpectancyWorldBank.csv"); // helper method
 		
-		countries = GeoJSONReader.loadData(arg0,  "data/countries.geo.json");
+		countries = GeoJSONReader.loadData(this,  "data/countries.geo.json");
 		countryMarkers = MapUtils.createSimpleMarkers(countries);
 		
 		map.addMarkers(countryMarkers);
