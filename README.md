@@ -1,8 +1,6 @@
 # [UC San Diego/Coursera: Object Oriented Programming in Java](https://www.coursera.org/learn/object-oriented-java/home/welcome)
 
-I'm making commits on branches named after their respective modules; **I'm not merging the branches to master**, which means if you want to see the work progress for a specific module, you'll need to checkout that branch. 
-
- 
+I'm making commits on branches named after their respective modules; ~~**I'm not merging the branches to master**, which means if you want to see the work progress for a specific module, you'll need to checkout that branch.~~ and am merging into master. If you want to see progress for a specific branch, checkout that branch. 
 
 original README follows: 
 ```
