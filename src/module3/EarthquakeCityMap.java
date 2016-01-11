@@ -45,7 +45,6 @@ public class EarthquakeCityMap extends PApplet {
 	public static final float THRESHOLD_LIGHT = 4;
 
 	
-	
 	// The map
 	private UnfoldingMap map;
 	
@@ -83,7 +82,10 @@ public class EarthquakeCityMap extends PApplet {
 	    	System.out.println(f.getProperties());
 	    	Object magObj = f.getProperty("magnitude");
 	    	float mag = Float.parseFloat(magObj.toString());
+	    	
 	    	// PointFeatures also have a getLocation method
+	    	Object loc = f.getLocation();
+	    	System.out.println("loc: " + loc);
 	    }
 	    
 	    // Here is an example of how to use Processing's color method to generate 
@@ -91,6 +93,12 @@ public class EarthquakeCityMap extends PApplet {
 	    int yellow = color(255, 255, 0);
 	    
 	    //TODO: Add code here as appropriate
+	    // Add marker for each earthquake in earthquakes. 
+	    // http://www.mkyong.com/java/how-to-loop-arraylist-in-java/
+	    for ( int i = 0; i < earthquakes.size(); i++ ) {
+//	    	System.out.println(earthquakes.get(i));
+	    	createMarker(earthquakes.get(i));
+	    }
 	}
 		
 	// A suggested helper method that takes in an earthquake feature and 
@@ -99,7 +107,14 @@ public class EarthquakeCityMap extends PApplet {
 	private SimplePointMarker createMarker(PointFeature feature)
 	{
 		// finish implementing and use this method, if it helps.
-		return new SimplePointMarker(feature.getLocation());
+//		return new SimplePointMarker(feature.getLocation());
+		
+		// http://unfoldingmaps.org/javadoc/de/fhpotsdam/unfolding/marker/SimplePointMarker.html
+		SimplePointMarker spoint = new SimplePointMarker(feature.getLocation()); 
+		spoint.setRadius((float) 10.0); 
+		// http://unfoldingmaps.org/tutorials/markers-simple.html
+		map.addMarker(spoint);
+		return spoint;
 	}
 	
 	public void draw() {
