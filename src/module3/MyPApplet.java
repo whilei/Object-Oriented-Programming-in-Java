@@ -31,7 +31,7 @@ public class MyPApplet extends PApplet {
 		int blueish = useableHour * 20; // approximate between 0-240 which is close enough to 255
 										// at hour = 12 :: blueish = 0; hour = 2 or 22 :: blueish = ~200
 		// check
-			System.out.println("useableHour: " + useableHour); // a million bajillion times
+//			System.out.println("useableHour: " + useableHour); // a million bajillion times
 		
 		fill(255, 209, blueish); // ellipse will be filled with this color
 		
