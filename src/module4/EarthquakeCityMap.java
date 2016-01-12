@@ -179,6 +179,7 @@ public class EarthquakeCityMap extends PApplet {
 		// not inside any country
 //		return false;
 		if (isLandAnswer > 0){
+			System.out.println("We got a dry one! earthquake: " + earthquake + ", in country: " + earthquake.getProperty("name")); // print to check
 			return true;
 		} else {
 			return false;
