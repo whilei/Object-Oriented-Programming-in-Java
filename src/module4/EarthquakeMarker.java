@@ -1,8 +1,11 @@
 package module4;
 
 import de.fhpotsdam.unfolding.data.PointFeature;
+
+import java.awt.List;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
-import processing.core.PGraphics;
+//import processing.core.PGraphics;
+import processing.core.*;
 
 /** Implements a visual marker for earthquakes on an earthquake map
  * 
@@ -77,6 +80,12 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	// You might find the getters below helpful.
 	private void colorDetermine(PGraphics pg) {
 		//TODO: Implement this method
+		float depth = getDepth();
+		float colorRatio = getDepth() / 700; // 700 is assumed max depth
+		int colorLeveler = 255 - Math.round(colorRatio*255);
+		pg.fill(colorLeveler, 0, 0, colorLeveler/4); // last arg is alpha (transparency); transparency increases with depth b/c less relevant
+		pg.noStroke(); // turn off useless black outlines
+//		System.out.println(getDepth()); // most are fairly shallow (between 0-100); one is at 593.3
 	}
 	
 	
