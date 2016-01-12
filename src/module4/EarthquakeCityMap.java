@@ -41,7 +41,6 @@ public class EarthquakeCityMap extends PApplet {
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
 	
-
 	//feed with magnitude 2.5+ Earthquakes
 	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
 	
@@ -70,18 +69,18 @@ public class EarthquakeCityMap extends PApplet {
 		else {
 			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-		    //earthquakesURL = "2.5_week.atom";
+//		    earthquakesURL = "2.5_week.atom";
+			
 		}
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
-		//earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+//		earthquakesURL = "test1.atom";
+//		earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
-		//earthquakesURL = "quiz1.atom";
-		
+//		earthquakesURL = "quiz1.atom";
 		
 		// (2) Reading in earthquake data and geometric properties
 	    //     STEP 1: load country features and markers
@@ -163,11 +162,27 @@ public class EarthquakeCityMap extends PApplet {
 	private boolean isLand(PointFeature earthquake) {
 		
 		// IMPLEMENT THIS: loop over all countries to check if location is in any of them
-		
+		int isLandAnswer = 0;
 		// TODO: Implement this method using the helper method isInCountry
-		
+		for (Marker country: countryMarkers) {
+			if (isInCountry(earthquake,country)) {
+				// It should also set the "country" property on the LandMarker to the country where the earthquake occurred.
+				LandQuakeMarker gotOne = new LandQuakeMarker(earthquake); // create new
+				gotOne.setProperty("name", country.getProperty("name")); // add property
+				quakeMarkers.add(gotOne); // add to quakeMarkers 
+				// This method should return true if the location of the input earthquake is on land.
+				isLandAnswer++;
+			} // PointFeature earthquake, Marker country
+		}
+			
 		// not inside any country
-		return false;
+//		return false;
+		if (isLandAnswer > 0){
+			System.out.println("We got a dry one! earthquake: " + earthquake + ", in country: " + earthquake.getProperty("name")); // print to check
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// prints countries with number of earthquakes
@@ -179,6 +194,53 @@ public class EarthquakeCityMap extends PApplet {
 	private void printQuakes() 
 	{
 		// TODO: Implement this method
+//		int[] quakeCount = new int[countryMarkers.size()]; // too big; we won't use all of them
+//		
+//		for (Marker quake : quakeMarkers) {
+//			quakeCount[quake.getProperty("country").toString()] =+ 1;
+//		}
+		
+		// for each country (don't care whether markers or features - we're just using it for a list), 
+		// we're going to look through all the quakes (yep, each time - this is slower than it probably could be)
+		// and see if there's any quakes with that country name set. 
+		for(Marker country : countryMarkers) {
+//			System.out.println(country.getProperties()); // {name=Afghanistan} ...
+			
+			int countryQuakeCount = 0; // this will be reset for each country
+			String countryName = country.getProperty("name").toString(); // NOTE: if you don't use toString(), you'll 
+																	     // see that country.getProperty() returns an Object
+			
+			// looking through all the quakes
+			for (Marker quake : quakeMarkers){
+//				System.out.println(quake.getProperty("name"));
+				
+				Object quakeCountryName = quake.getProperty("name");
+				
+//				if (quakeCountryName == null){
+//					// is in ocean
+//				}
+				
+				 if (quakeCountryName != null && quakeCountryName.toString().equals(countryName)) { // http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
+					countryQuakeCount++; // if quakeCountryName matches the countryName (via for loop), we'll add to it's quakeCount
+//					System.out.println("Quake reported in " + countryName);
+				}
+			}
+			// if the country (again, via for loop) has more than 0 quakes, print it out along with the total number (found incrementally) of quakes
+			if (countryQuakeCount > 0){
+				System.out.println(countryName + ": " + countryQuakeCount/2); // I HAVE NO IDEA WHY MY INCREMENT COUNT DOUBLES.
+																			  // think it's got something to do with loop-d-loops
+			}
+		}
+		
+		// oops! forgot to add the part where it prints the number of ocean quakes.
+		// here goes.
+		int oceanQuakeCount = 0;
+		for(Marker quake : quakeMarkers) {
+			if (quake.getProperty("name") == null){ // no name means in ocean (remember quake.getProperty("name") returns an object, which is why we can use == to compare to null
+				oceanQuakeCount++;
+			}
+		}
+		System.out.println("Total number of OCEAN QUAKES: " + oceanQuakeCount);
 	}
 	
 	
@@ -200,6 +262,7 @@ public class EarthquakeCityMap extends PApplet {
 					
 				// checking if inside
 				if(((AbstractShapeMarker)marker).isInsideByLocation(checkLoc)) {
+					// add property "country" to earthquake PointFeature from country Marker
 					earthquake.addProperty("country", country.getProperty("name"));
 						
 					// return if is inside one

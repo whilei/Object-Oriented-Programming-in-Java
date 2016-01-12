@@ -38,11 +38,14 @@ public class CityMarker extends SimplePointMarker {
 	/**
 	 * Implementation of method to draw marker on the map.
 	 */
-	public void draw(PGraphics pg, float x, float y) {
+	public void draw(PGraphics pg, float x, float y) { // x and y are the argumentative coordinates of the cities
 		// Save previous drawing style
 		pg.pushStyle();
 		
 		// TODO: Add code to draw a triangle to represent the CityMarker
+//		pg.triangle(15, 37, 29, 10, 43, 37);
+		pg.fill(50, 50, 50);
+		pg.ellipse(x-2, y-2, 4, 4); // arg coords!
 		
 		// Restore previous drawing style
 		pg.popStyle();

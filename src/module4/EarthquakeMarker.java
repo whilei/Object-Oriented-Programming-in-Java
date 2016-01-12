@@ -1,8 +1,11 @@
 package module4;
 
 import de.fhpotsdam.unfolding.data.PointFeature;
+
+import java.awt.List;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
-import processing.core.PGraphics;
+//import processing.core.PGraphics;
+import processing.core.*;
 
 /** Implements a visual marker for earthquakes on an earthquake map
  * 
@@ -65,6 +68,7 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 		drawEarthquake(pg, x, y);
 		
 		// OPTIONAL TODO: draw X over marker if within past day		
+		// 
 		
 		// reset to previous styling
 		pg.popStyle();
@@ -77,6 +81,16 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	// You might find the getters below helpful.
 	private void colorDetermine(PGraphics pg) {
 		//TODO: Implement this method
+		
+		// I'm doing it backwards: 
+			// magnitude is color, depth is radius
+			// higher magnitude is brighter color, high depth is bigger radius
+		double magnitude = getMagnitude();
+		double colorRatio = (magnitude - 2.5) / 7.5; // 2.5-10
+		int colorLeveler = (int) Math.round(255 - 255*colorRatio);
+		pg.fill(colorLeveler, 0, 0, colorLeveler/4); // last arg is alpha (transparency); transparency increases with depth b/c less relevant
+		pg.noStroke(); // turn off useless black outlines
+//		System.out.println(getDepth()); // most are fairly shallow (between 0-100); one is at 593.3
 	}
 	
 	
