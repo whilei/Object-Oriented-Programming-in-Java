@@ -163,11 +163,26 @@ public class EarthquakeCityMap extends PApplet {
 	private boolean isLand(PointFeature earthquake) {
 		
 		// IMPLEMENT THIS: loop over all countries to check if location is in any of them
-		
+		int isLandAnswer = 0;
 		// TODO: Implement this method using the helper method isInCountry
-		
+		for (Marker country: countryMarkers) {
+			if (isInCountry(earthquake,country)) {
+				// It should also set the "country" property on the LandMarker to the country where the earthquake occurred.
+				LandQuakeMarker gotOne = new LandQuakeMarker(earthquake); // create new
+				gotOne.setProperty("name", country.getProperty("name")); // add property
+				quakeMarkers.add(gotOne); // add to quakeMarkers 
+				// This method should return true if the location of the input earthquake is on land.
+				isLandAnswer++;
+			} // PointFeature earthquake, Marker country
+		}
+			
 		// not inside any country
-		return false;
+//		return false;
+		if (isLandAnswer > 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// prints countries with number of earthquakes
@@ -179,6 +194,36 @@ public class EarthquakeCityMap extends PApplet {
 	private void printQuakes() 
 	{
 		// TODO: Implement this method
+		
+		// for each country (don't care whether markers or features - we're just using it for a list), 
+		// we're going to look through all the quakes (yep, each time - this is slower than it probably could be)
+		// and see if there's any quakes with that country name set. 
+		for(Marker country : countryMarkers) {
+//			System.out.println(country.getProperties()); // {name=Afghanistan} ...
+			
+			int countryQuakeCount = 0; // this will be reset for each country
+			String countryName = country.getProperty("name").toString(); // NOTE: if you don't use toString(), you'll 
+																	     // see that country.getProperty() returns an Object
+
+			// looking through all the quakes
+			for (Marker quake : quakeMarkers){
+//				System.out.println(quake.getProperty("name"));
+				
+				Object quakeCountryName = quake.getProperty("name");
+				
+				if (quakeCountryName == null){
+					// is in ocean
+				}
+				
+				else if (quakeCountryName.toString().equals(countryName)) { // http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
+					countryQuakeCount++; // if quakeCountryName matches the countryName (via for loop), we'll add to it's quakeCount
+				}
+			}
+			// if the country (again, via for loop) has more than 0 quakes, print it out along with the total number (found incrementally) of quakes
+			if (countryQuakeCount > 0){
+				System.out.println(countryName + ": " + countryQuakeCount);
+			}
+		}
 	}
 	
 	
@@ -200,6 +245,7 @@ public class EarthquakeCityMap extends PApplet {
 					
 				// checking if inside
 				if(((AbstractShapeMarker)marker).isInsideByLocation(checkLoc)) {
+					// add property "country" to earthquake PointFeature from country Marker
 					earthquake.addProperty("country", country.getProperty("name"));
 						
 					// return if is inside one
