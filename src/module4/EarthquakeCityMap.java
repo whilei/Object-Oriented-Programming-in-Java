@@ -41,7 +41,6 @@ public class EarthquakeCityMap extends PApplet {
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
 	
-
 	//feed with magnitude 2.5+ Earthquakes
 	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
 	
@@ -70,18 +69,18 @@ public class EarthquakeCityMap extends PApplet {
 		else {
 			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-		    //earthquakesURL = "2.5_week.atom";
+//		    earthquakesURL = "2.5_week.atom";
+			
 		}
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
-		//earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+//		earthquakesURL = "test1.atom";
+//		earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
-		//earthquakesURL = "quiz1.atom";
-		
+//		earthquakesURL = "quiz1.atom";
 		
 		// (2) Reading in earthquake data and geometric properties
 	    //     STEP 1: load country features and markers
@@ -195,6 +194,11 @@ public class EarthquakeCityMap extends PApplet {
 	private void printQuakes() 
 	{
 		// TODO: Implement this method
+//		int[] quakeCount = new int[countryMarkers.size()]; // too big; we won't use all of them
+//		
+//		for (Marker quake : quakeMarkers) {
+//			quakeCount[quake.getProperty("country").toString()] =+ 1;
+//		}
 		
 		// for each country (don't care whether markers or features - we're just using it for a list), 
 		// we're going to look through all the quakes (yep, each time - this is slower than it probably could be)
@@ -205,24 +209,26 @@ public class EarthquakeCityMap extends PApplet {
 			int countryQuakeCount = 0; // this will be reset for each country
 			String countryName = country.getProperty("name").toString(); // NOTE: if you don't use toString(), you'll 
 																	     // see that country.getProperty() returns an Object
-
+			
 			// looking through all the quakes
 			for (Marker quake : quakeMarkers){
 //				System.out.println(quake.getProperty("name"));
 				
 				Object quakeCountryName = quake.getProperty("name");
 				
-				if (quakeCountryName == null){
-					// is in ocean
-				}
+//				if (quakeCountryName == null){
+//					// is in ocean
+//				}
 				
-				else if (quakeCountryName.toString().equals(countryName)) { // http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
+				 if (quakeCountryName != null && quakeCountryName.toString().equals(countryName)) { // http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
 					countryQuakeCount++; // if quakeCountryName matches the countryName (via for loop), we'll add to it's quakeCount
+//					System.out.println("Quake reported in " + countryName);
 				}
 			}
 			// if the country (again, via for loop) has more than 0 quakes, print it out along with the total number (found incrementally) of quakes
 			if (countryQuakeCount > 0){
-				System.out.println(countryName + ": " + countryQuakeCount);
+				System.out.println(countryName + ": " + countryQuakeCount/2); // I HAVE NO IDEA WHY MY INCREMENT COUNT DOUBLES.
+																			  // think it's got something to do with loop-d-loops
 			}
 		}
 		
