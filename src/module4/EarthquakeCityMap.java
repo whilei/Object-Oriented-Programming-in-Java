@@ -225,6 +225,16 @@ public class EarthquakeCityMap extends PApplet {
 				System.out.println(countryName + ": " + countryQuakeCount);
 			}
 		}
+		
+		// oops! forgot to add the part where it prints the number of ocean quakes.
+		// here goes.
+		int oceanQuakeCount = 0;
+		for(Marker quake : quakeMarkers) {
+			if (quake.getProperty("name") == null){ // no name means in ocean (remember quake.getProperty("name") returns an object, which is why we can use == to compare to null
+				oceanQuakeCount++;
+			}
+		}
+		System.out.println("Total number of OCEAN QUAKES: " + oceanQuakeCount);
 	}
 	
 	
