@@ -1,6 +1,7 @@
 package module5;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -35,7 +36,7 @@ public class EarthquakeCityMap extends PApplet {
 	private static final long serialVersionUID = 1L;
 
 	// IF YOU ARE WORKING OFFILINE, change the value of this variable to true
-	private static final boolean offline = false;
+	private static final boolean offline = true;//false;
 	
 	/** This is where to find the local tiles, for working without an Internet connection */
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
@@ -146,6 +147,28 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		// TODO: Implement this method
+		// goal is set ?ifSelected -> true
+		// iterate through all the markers and see if they're 
+		// under the mouse cursor at mouseX and mouseY
+			// if they (it) is, for the first marker, m, found under the cursor:
+			// m.setSelected(true)
+			// lastSelected = m
+		
+		// need to get location of marker
+		for (Marker marker: markers) {
+			// Lat/Lng
+//			Location markerLocation = marker.getLocation();
+			//System.out.println(markerLocation); // => (19.107, -66.489)
+			
+			if(marker.isInside(map, mouseX, mouseY)) {
+				
+				lastSelected.setSelected(true);
+//				HashMap<String, Object> props = marker.getProperties();
+//				String propsString = props.toString();
+//				System.out.println("hovering over " + propsString);
+			}
+			
+		}
 	}
 	
 	/** The event handler for mouse clicks
