@@ -8,7 +8,13 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
 
 
 public class Notes extends PApplet {
-
+	// PApplet *implements* <<interfaces>> like MouseListener and KeyListener 
+	// MapWithButton -> PApplet -> MouseListener
+	
+	// UnfoldingMap -> <<interface>> EventListener, ie `void onManipulation (MapEvent event) {...}`
+		// like zoom, pan
+	
+	
 	private UnfoldingMap map;
 	
 	// once
@@ -38,10 +44,10 @@ public class Notes extends PApplet {
 //	}
 	public void mouseReleased() {
 		if (mouseX > 100 && mouseX < 125 && mouseY > 100 && mouseY < 125) {
-			background(255,255,255);
+			background(255,255,255); // set white
 		}
 		else if (mouseX > 100 && mouseX < 125 && mouseY > 150 && mouseY < 175) {
-			background(100,100,100);
+			background(100,100,100); // set gray
 		}
 	}
 	
