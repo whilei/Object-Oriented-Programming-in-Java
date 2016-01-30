@@ -160,12 +160,13 @@ public class EarthquakeCityMap extends PApplet {
 //			Location markerLocation = marker.getLocation();
 			//System.out.println(markerLocation); // => (19.107, -66.489)
 			
-			if(marker.isInside(map, mouseX, mouseY)) {
-				
-				lastSelected.setSelected(true);
-//				HashMap<String, Object> props = marker.getProperties();
-//				String propsString = props.toString();
-//				System.out.println("hovering over " + propsString);
+			if(lastSelected == null && marker.isInside(map, mouseX, mouseY)) {
+				Marker m = marker; 
+				marker.setSelected(true);
+				lastSelected = (CommonMarker) m;
+
+				// check
+				System.out.println(m.getProperties()); 
 			}
 			
 		}
