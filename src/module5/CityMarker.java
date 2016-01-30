@@ -54,11 +54,13 @@ public class CityMarker extends CommonMarker {
 		// TODO: Implement this method
 //		pg.text(getCity()+","+getCountry()+","+getPopulation(), x, y);
 //		pg.rect(x, x, 100, 100);
-		System.out.println("showtitle " + x + ", " + y);
-		System.out.println(getCity());
 		String shouldSay = getCity() + ", " + getCountry() + " | pop: " + getPopulation();
+		System.out.println(x + ", " + y);
+		System.out.println(shouldSay);
 		
+		pg.popStyle();
 		pg.pushStyle();
+//		pg.pushStyle();
 		
 //		pg.fill(255,255,255); // white
 		
@@ -68,11 +70,11 @@ public class CityMarker extends CommonMarker {
 //		pg.rect(25, 25, 50, 200);
 //		pg.color(0, 0, 0);
 		
-		pg.text(shouldSay, 10, 10);
+//		pg.text(shouldSay, 10, 10);
 //		pg.fill(100,100,100);
 //		pg.rect(x, y, 50, 50);
 		
-		pg.popStyle();
+//		pg.popStyle();
 	}
 	
 	

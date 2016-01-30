@@ -161,9 +161,9 @@ public class EarthquakeCityMap extends PApplet {
 			//System.out.println(markerLocation); // => (19.107, -66.489)
 			
 			if(lastSelected == null && marker.isInside(map, mouseX, mouseY)) {
-				Marker m = marker; 
+				CommonMarker m = (CommonMarker) marker; 
 				marker.setSelected(true);
-				lastSelected = (CommonMarker) m;
+				lastSelected = m;
 				lastSelected.showTitle(null, mouseX, mouseY);
 				// check
 				System.out.println(m.getProperties()); 
