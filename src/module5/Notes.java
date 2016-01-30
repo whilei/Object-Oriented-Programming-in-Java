@@ -21,11 +21,28 @@ public class Notes extends PApplet {
 	
 	// continuous loop
 	public void draw() {
+		map.draw();
+		
+		// draw squareys
 		fill(255,255,255);
 		rect(100,100,25,25);
-		fill(100, 100, 100);
-		rect (100, 100, 25, 25);
-		map.draw();
+		fill(100,100,100);
+		rect(100,150,25,25);
+	}
+	
+//	public void mousePressed() {
+//		
+//	}
+//	public void mouseClicked() {
+//		
+//	}
+	public void mouseReleased() {
+		if (mouseX > 100 && mouseX < 125 && mouseY > 100 && mouseY < 125) {
+			background(255,255,255);
+		}
+		else if (mouseX > 100 && mouseX < 125 && mouseY > 150 && mouseY < 175) {
+			background(100,100,100);
+		}
 	}
 	
 	// application acting as a listener
