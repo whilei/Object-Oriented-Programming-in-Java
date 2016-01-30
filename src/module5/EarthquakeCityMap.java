@@ -66,6 +66,7 @@ public class EarthquakeCityMap extends PApplet {
 	public void setup() {		
 		// (1) Initializing canvas and map tiles
 		size(900, 700, OPENGL);
+		background(255,255,255);
 		if (offline) {
 		    map = new UnfoldingMap(this, 200, 50, 650, 600, new MBTilesMapProvider(mbTilesString));
 		    earthquakesURL = "2.5_week.atom";  // The same feed, but saved August 7, 2015
@@ -121,7 +122,6 @@ public class EarthquakeCityMap extends PApplet {
 		background(0);
 		map.draw();
 		addKey();
-		
 	}
 	
 	/** Event handler that gets called automatically when the 
@@ -164,9 +164,10 @@ public class EarthquakeCityMap extends PApplet {
 				Marker m = marker; 
 				marker.setSelected(true);
 				lastSelected = (CommonMarker) m;
-
+				lastSelected.showTitle(null, mouseX, mouseY);
 				// check
 				System.out.println(m.getProperties()); 
+				return; // will stop for loop when finds first 
 			}
 			
 		}
